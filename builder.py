@@ -14,7 +14,7 @@ def build_executable(script_path, output_dir="dist", onefile=True, windowed=Fals
     if onefile:
         args.append("--onefile")
     if windowed:
-        args.append("--noconsole")
+        args.append("--console")
     if icon_path and os.path.exists(icon_path):
         args.append(f"--icon={icon_path}")
     if additional_files:

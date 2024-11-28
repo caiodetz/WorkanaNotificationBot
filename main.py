@@ -174,4 +174,11 @@ def menu():
 banner()
 time.sleep(2)
 url = menu()
-main(url=url)
+while True:
+    try:
+        main(url=url)
+    except KeyboardInterrupt:
+        console.print("[bold red]Saindo...[/bold red]")
+        exit(0)
+    except:
+        pass
