@@ -113,9 +113,9 @@ def main(url: str):
                 if j != i:
                     notification_path = resource_path("notification.mp3")
                     playsound(notification_path)
-                    description = gerarRemumoComGemini(descriptions[0])
-                    console.print("[bold][blue]🤖 Resumo gerado pelo Gemini: [/bold][/blue]")
-                    console.print(description)
+                    # description = gerarRemumoComGemini(descriptions[0])
+                    # console.print("[bold][blue]🤖 Resumo gerado pelo Gemini: [/bold][/blue]")
+                    # console.print(description)
                     write_logs(output[0])
 
         except ConnectionError:
@@ -124,8 +124,8 @@ def main(url: str):
         except KeyboardInterrupt:
             console.print("[bold red]Saindo...[/bold red]")
             exit(0)
+            break
         reload_time(60)
-
 
 def banner():
     console.print("[bold green]------------------------------[/bold green]")
@@ -174,11 +174,5 @@ def menu():
 banner()
 time.sleep(2)
 url = menu()
-while True:
-    try:
-        main(url=url)
-    except KeyboardInterrupt:
-        console.print("[bold red]Saindo...[/bold red]")
-        exit(0)
-    except:
-        pass
+
+main(url=url)
