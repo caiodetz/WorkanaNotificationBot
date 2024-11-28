@@ -92,7 +92,7 @@ def main(url: str):
                 # print(res.json())
                 # input("Press any key to continue...")
                 output = parser(res.json())
-                descriptions = [f"{result["description"]}" for result in res.json()["results"]["results"] if not result["isSearchFeatured"]]            
+                descriptions = [f"{result['description']}" for result in res.json()["results"]["results"] if not result["isSearchFeatured"]]            
             except Exception:
                 console.print("[bold cyan]🍂 Tempo para n tomar timeout[/bold cyan]")
                 print("Erro: err")
