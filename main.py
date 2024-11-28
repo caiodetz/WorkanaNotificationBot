@@ -15,14 +15,14 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
-
 def write_logs(project):
-    with open("log-project.txt", 'a') as f:
-        f.write(f'{datetime.now()}')
-        f.write('\n')
-        f.write(project)
-        f.write('\n')
-        f.close()
+    pass
+    # with open("log-project.txt", 'a') as f:
+    #     f.write(f'{datetime.now()}')
+    #     f.write('\n')
+    #     f.write(project)
+    #     f.write('\n')
+    #     f.close()
 
 def reload_time(duracao: int):
     try:
@@ -35,38 +35,38 @@ def reload_time(duracao: int):
         console.print("[bold red]Saindo...[/bold red]")
         exit(0)
 
-def gerarRemumoComGemini(desc: str):
+# def gerarRemumoComGemini(desc: str):
     
-    try:
-        client = Gemini(cookies=cookies, auto_cookies=True, verify=True)
-        res = client.generate_content(f"""Crie um resumo conciso e informativo para o seguinte projeto:
-Descrição do projeto: {desc}
+#     try:
+#         client = Gemini(cookies=cookies, auto_cookies=True, verify=True)
+#         res = client.generate_content(f"""Crie um resumo conciso e informativo para o seguinte projeto:
+# Descrição do projeto: {desc}
 
-Formato do resumo me retorne apenas isso e nada mais nada nenhum o ok nem nada só o resmumo nesse formato:
-Dá pra fazer: Sim ou Não, só quero utilizar flutter, firebase, mongodb, nextjs, typescript/javascript e só mente isso me retorne se dá pra fazer de acordo com essas caracteristicas
-Estimativa de Prazo: [Insira um prazo estimado em meses, considere 6 a 8 horas por dia de seg a sex no cauculo]
-Resumo do Projeto: Um resumo curto de no máximo 10 linhas, destacando os principais objetivos, funcionalidades e tecnologias envolvidas.""")
+# Formato do resumo me retorne apenas isso e nada mais nada nenhum o ok nem nada só o resmumo nesse formato:
+# Dá pra fazer: Sim ou Não, só quero utilizar flutter, firebase, mongodb, nextjs, typescript/javascript e só mente isso me retorne se dá pra fazer de acordo com essas caracteristicas
+# Estimativa de Prazo: [Insira um prazo estimado em meses, considere 6 a 8 horas por dia de seg a sex no cauculo]
+# Resumo do Projeto: Um resumo curto de no máximo 10 linhas, destacando os principais objetivos, funcionalidades e tecnologias envolvidas.""")
     
-        format_response = render_md(res.text)
-    except:
-        format_response = "Erro ao conectar com Gemmi"
+#         format_response = render_md(res.text)
+#     except:
+#         format_response = "Erro ao conectar com Gemmi"
     
-    return format_response
+#     return format_response
 
 def remove_html(html_str):
     soup = BeautifulSoup(html_str, "html.parser")
     return soup.get_text()
 
-def render_md(md: str):
-    md_render = Markdown(md)
-    return md_render
+# def render_md(md: str):
+#     md_render = Markdown(md)
+#     return md_render
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def parser(html):
     results = html["results"]["results"]
-    return [f"""[green][bold]🚸 Titulo: [/bold][/green]{remove_html(result["title"])}\n[bold][green]🔥 Postado em:[/bold][/green] {result["postedDate"]}\n[bold][green]⚡️ Ultima Resposta:[/bold][/green] {result["lastEmployerMessage"]}\n[bold][green]⛓️‍💥 Url:[/bold][/green] [link=https://www.workana.com/messages/bid/{result["slug"]}/?tab=message&ref=project_view]Clique aqui[/link]""" for result in results if not result["isSearchFeatured"] and int(result["totalBids"].split(" ")[1]) < 4]
+    return [f"""[green][bold]🚸 Titulo: [/bold][/green]{remove_html(result['title'])}\n[bold][green]🔥 Postado em:[/bold][/green] {result['postedDate']}\n[bold][green]⚡️ Ultima Resposta:[/bold][/green] {result['lastEmployerMessage']}\n[bold][green]⛓️‍💥 Url:[/bold][/green] [link=https://www.workana.com/messages/bid/{result['slug']}/?tab=message&ref=project_view]Clique aqui[/link]""" for result in results if not result['isSearchFeatured'] and int(result['totalBids'].split(" ")[1]) < 4]
 
 
 console = Console()
